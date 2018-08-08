@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>user login</title>
+	<link rel="stylesheet" th:href="@{/css/zui.min.css}"></link>
+	<script th:src="@{/js/jquery.js}"></script>
+	<script th:src="@{/js/zui.min.js}"></script>
+</head>
+<body>
+	<div class="container-fixed-xs">
+		<br/>
+		<div>全国职业院校技能大赛高职组移动互联网应用软件开发赛项2017年专用</div>
+		<br/>
+		<h2 style="text-align:center">用户登录</h2>
+		<form th:action="@{/login}" method="post" >
+			<input type="text" class="form-control" name="username" placeholder="username" /><br/>
+			<input type="password" class="form-control" name="password" placeholder="password" /><br/>
+			<span style="float: right;">
+				<input type="submit" class="btn" value="login" />
+				<input type="reset" class="btn" value="reset" />
+			</span>
+			<br/>
+			<span th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
+		</form>
+	</div>
+</body>
+</html>

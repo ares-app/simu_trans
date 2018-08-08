@@ -1,0 +1,62 @@
+//@RequestMapping({"/api/user/query_all","/action/GetSUserInfo"})
+	public Map<String, Object> query_alluser() {
+		Map<String, Object> r = new HashMap<>();
+		r.put("data", userdao.findAll());
+		return r;
+	}
+	
+	@RequestMapping({"/api/user/query","/action/user/query"})
+	public Map<String, Object> query_user(@RequestBody UserModel model) {
+		log.info(model.toString());
+		Map<String, Object> r = new HashMap<>();
+		String username=model.getUsername();
+		if(!StringUtils.isEmpty(username))
+			r.put("data", userdao.findByUsername(model.getUsername()));
+		return r;
+	}
+	
+	//@RequestMapping({"/api/peccancy/query_all","/action/GetAllCarPeccancy"})
+	public Map<String, Object> query_allpeccancy() {
+		Map<String, Object> r = new HashMap<>();
+		r.put(KEY_ROWS_OF_SRV, peccancydao.findAll());
+		r.put(KEY_RESULT_OF_SRV, CODE_SUCCESS_OF_SRV);
+		r.put(KEY_ERRMSG_OF_SRV, MSG_SUCCESS_OF_SRV);
+		return r;
+	}
+	
+	//@RequestMapping({"/api/peccancy/query","/action/GetCarPeccancy"})
+	public Map<String, Object> query_peccancy(@RequestBody TransModel m) {
+		Map<String, Object> r = new HashMap<>();
+		r.put(KEY_ROWS_OF_SRV, peccancydao.findByCarnumber(m.getCarnumber()));
+		r.put(KEY_RESULT_OF_SRV, CODE_SUCCESS_OF_SRV);
+		r.put(KEY_ERRMSG_OF_SRV, MSG_SUCCESS_OF_SRV);
+		return r;
+	}
+	
+	//@RequestMapping({"/api/carinfo/query","/action/GetCarInfo"})
+	public Map<String, Object> query_carinfo() {
+		Map<String, Object> r = new HashMap<>();
+		r.put(KEY_ROWS_OF_SRV,cardao.findAll());
+		r.put(KEY_RESULT_OF_SRV, CODE_SUCCESS_OF_SRV);
+		r.put(KEY_ERRMSG_OF_SRV, MSG_SUCCESS_OF_SRV);
+		return r;
+	}
+	
+	//@RequestMapping({"/api/carinfo/query","/action/GetPeccancyType"})
+	public Map<String, Object> query_pectype() {
+		Map<String, Object> r = new HashMap<>();
+		r.put(KEY_ROWS_OF_SRV,pecdao.findAll());
+		r.put(KEY_RESULT_OF_SRV, CODE_SUCCESS_OF_SRV);
+		r.put(KEY_ERRMSG_OF_SRV, MSG_SUCCESS_OF_SRV);
+		return r;
+	}
+	
+	//[{\"Distance\":50850,\"BusId\":1},{\"Distance\":12150,\"BusId\":2}]
+	public static void main(String[] args) throws Exception{
+		final ObjectMapper mapper = new ObjectMapper();
+		String s="[{\"Distance\":50850,\"BusId\":1},{\"Distance\":12150,\"BusId\":2}]";
+		List<Map> x = mapper.readValue(s,new TypeReference<List<Map>>(){});
+		System.out.println(x);
+	}
+	
+	

@@ -1,0 +1,13 @@
+http://localhost:8288/ares-app/h2-console
+
+register_user
+	http://localhost:8288/ares-app/user/register?userid=admin&username=admin&password=cc&email=admin@ares.com&isadmin=1
+
+
+create table suser(userid varchar(100) primary key,username varchar(100),password varchar(100),email varchar(100),isadmin varchar(1));
+create unique index idx_suser_uname on suser(username);
+insert into suser(userid,username,password,email,isadmin) values('001','tom','tom001','tom@ares.com','0');
+insert into suser(userid,username,password,email,isadmin) values('002','anna','anna002','anna@ares.com','0');
+insert into suser(userid,username,password,email,isadmin) values('003','jack','jack003','jack@ares.com','0');
+insert into suser(userid,username,password,email,isadmin) values('004','tdk','tdk004','tdk@ares.com','0');
+insert into suser(userid,username,password,email,isadmin) values('000','admin','admin','admin@ares.com','1');

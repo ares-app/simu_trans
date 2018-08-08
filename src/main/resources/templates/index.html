@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Index</title>
+	<link rel="stylesheet" th:href="@{/css/zui.min.css}"></link>
+	<script th:src="@{/js/jquery.js}"></script>
+	<script th:src="@{/js/zui.min.js}"></script>
+</head>
+<body>
+	<h2>user index</h2>
+	<div id="msg"></div>
+	<script>
+		if(!!window.EventSource){
+			var source=new EventSource("p");
+			s="";
+			source.addEventListener('message',function(e){
+				s+=e.data+"<br/>"
+				$("#msg").html(s);
+			});
+			source.addEventListener('open',function(e){
+				console.log("con open");
+			},false);
+			source.addEventListener('error',function(e){
+				if(e.readyState==EventSource.CLOSED)
+					console.log("con close");
+				else
+					console.log("**"+e.readyState);
+			},false);
+		}else
+			console.log("sorry,browse not support sse")
+	</script>
+</body>
+</html>

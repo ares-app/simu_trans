@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>User List</title>
+	<link rel="stylesheet" th:href="@{/css/zui.min.css}"></link>
+	<script th:src="@{/js/jquery.js}"></script>
+	<script th:src="@{/js/zui.min.js}"></script>
+	<style type="text/css">
+		td,th {text-align:center}
+	</style>
+</head>
+<body>
+	
+	<div class="container-fixed-sm" style="text-align:center">
+		<br/>
+		<div>全国职业院校技能大赛高职组移动互联网应用软件开发赛项2017年专用</div>
+		<br/>
+		<h2 >用户列表</h2>
+		<table th:unless="${#lists.isEmpty(users)}" class="table table-bordered">
+			<thead>
+				<tr>
+					<th>用户名称</th>
+					<th>口令</th>
+					<th>角色</th>
+					<th>动作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.username}"></td>
+					<td th:text="${user.password}"></td>
+					<td th:text="${roles[user.role]}"></td>
+					<td>
+						<div class="btn-toolbar">
+						  <div class="btn-group">
+						    <a class="btn" th:href="@{'/user/set_adv?username='+${user.username}}">设为一般管理员</a>
+						    <a class="btn" th:href="@{'/user/set_nor?username='+${user.username}}">设为普通用户</a>
+						    <a class="btn" th:href="@{'/user/disable?username='+${user.username}}">设为无效用户</a>
+						  </div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="has-success container-fixed-sm" style="text-align:center">
+		<h2>沙盘ip</h2>
+		<form th:action="@{/param/setip}" method="post" >
+			
+			<div class="input-group">
+			  <input type="text" class="form-control" name="sand_ip" th:value="${sand_ip}" placeholder="sand table ip" />
+			  <span class="input-group-btn">
+			    <button class="btn btn-default" type="submit">设置ip</button>
+			  </span>
+			</div>
+		</form>
+	</div>
+	
+</body>
+</html>

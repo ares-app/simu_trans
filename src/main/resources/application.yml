@@ -1,0 +1,4 @@
+jasypt:
+  encryptor:
+    password: ares@2017
+   
